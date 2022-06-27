@@ -27,7 +27,8 @@ class CepController {
     try {
       if (result.statusCode == 200) {
         if (result.data['erro'] != null) {
-          Messages.alert('Erro', 'Digite um CEP valido e tente novamente!', context);
+          Messages.alert(
+              'Erro', 'Digite um CEP valido e tente novamente!', context);
         } else {
           Messages.success('Sucesso', 'Cep encontrado com sucesso!', context);
         }
@@ -40,4 +41,6 @@ class CepController {
 
     return resultData.value = ResultCep.fromMap(result.data);
   }
+
+
 }

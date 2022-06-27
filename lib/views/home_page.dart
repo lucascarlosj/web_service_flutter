@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:validatorless/validatorless.dart';
 import 'package:web_service/controller/cep_controller.dart';
+import 'package:web_service/core/widgets/message_widget.dart';
 import 'package:web_service/models/result_cep.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +28,9 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              shareCep(cepController, context);
+            },
             icon: const Icon(
               Icons.share,
               color: Colors.black45,
@@ -86,40 +89,47 @@ class _HomePageState extends State<HomePage> {
                           visible: value.localidade.toString().isNotEmpty,
                           child: Text(
                             value.localidade.toString(),
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Visibility(
                           visible: value.bairro.toString().isNotEmpty,
                           child: Text(
                             value.bairro.toString(),
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Text(
                           value.cep.toString(),
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           value.ddd.toString(),
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Visibility(
                           visible: value.gia.toString().isNotEmpty,
                           child: Text(
                             value.gia.toString(),
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Text(
                           value.ibge.toString(),
-                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Visibility(
                           visible: value.logradouro.toString().isNotEmpty,
                           child: Text(
                             value.logradouro.toString(),
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
@@ -132,5 +142,16 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+shareCep(dynamic dataCep, BuildContext context) {
+  final cepData = dataCep.resultData.value;
+
+  if (cepData.cep != "") {
+    Share.share(
+        'CEP:${cepData.cep}, Logradouro:${cepData.logradouro}, Bairro:${cepData.bairro}, Localidde:${cepData.localidade}, UF:${cepData.uf}, Ibge:${cepData.ibge}, Gia:${cepData.gia}, DDD:${cepData.ddd}');
+  } else {
+    Messages.alert("Cep nao pesquisado", "Voce nao pesquisou um cep", context);
   }
 }
