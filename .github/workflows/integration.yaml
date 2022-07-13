@@ -2,9 +2,7 @@ name: Run analyze and tests
 on:
   pull_request:
     branches:
-      - homol
       - master
-      - dev
       - main
 
 jobs:
@@ -19,17 +17,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '12.x'
-
+      
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-
-        - name: Run install dependencies
+        
+      - name: Run install dependencies
         run: flutter pub get
-
+      
       - name: Analyze dart code for any errors
         run: flutter analyze --verbose
-
-      - name: Run tests
-        run: flutter test 
