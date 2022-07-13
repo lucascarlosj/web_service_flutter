@@ -28,6 +28,3 @@ jobs:
       
       - name: Analyze dart code for any errors
         run: flutter analyze --verbose
-      
-      - name: Run tests
-        run: flutter test 
