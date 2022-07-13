@@ -2,15 +2,13 @@ name: Run analyze and tests
 on:
   pull_request:
     branches:
-      - homol
       - master
-      - dev
       - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Get repository
         uses: actions/checkout@v3
@@ -25,8 +23,8 @@ jobs:
         with:
           channel: 'stable'
         
-        - name: Run install dependencies
-          run: flutter pub get
+      - name: Run install dependencies
+        run: flutter pub get
       
       - name: Analyze dart code for any errors
         run: flutter analyze --verbose
