@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                   child: const Text('Pesquisar'),
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 55,
                 ),
                 ValueListenableBuilder<ResultCep>(
                   valueListenable: cepController.resultData,
